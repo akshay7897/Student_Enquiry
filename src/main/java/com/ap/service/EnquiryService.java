@@ -16,7 +16,7 @@ public interface EnquiryService {
 
 	public List<EnquiryForm> getResponse(Integer userId, EnquirySearchCriteria searchCriteria);
 
-	public String upsertEnquiry(EnquiryForm enquiryForm);
+	public boolean upsertEnquiry(EnquiryForm enquiryForm);
 
 	public EnquiryForm getEnquiryForm(Integer enqId);
 

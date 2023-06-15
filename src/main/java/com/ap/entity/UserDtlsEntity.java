@@ -17,7 +17,7 @@ import lombok.Data;
 @Table(name = "userdetails")
 @Data
 public class UserDtlsEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userId;
@@ -26,9 +26,8 @@ public class UserDtlsEntity {
 	private String email;
 	private String accountStatus;
 	private Long phno;
-	
-	/*
-	 * @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch =
-	 * FetchType.EAGER) private List<StudentEnqEntity> enquiries;
-	 */
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<StudentEnqEntity> enquiries;
+
 }

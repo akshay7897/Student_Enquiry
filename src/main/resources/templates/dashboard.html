@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
-<title>Ashok IT - Dashboard</title>
+<title>Akshay- Dashboard</title>
 <!-- MDB icon -->
 <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
 <!-- Font Awesome -->
@@ -57,9 +57,9 @@
 										<h4 class="mt-1 mb-5 pb-1">Your Performance</h4>
 									</div>
 
-									<h2>Total Enquiries : 256 </h2>
-									<h2 class="text-success">Enrolled : 84 </h2>
-									<h2 class="text-danger">Lost : 172</h2>
+									<h2>Total Enquiries :<p th:text="${dashboard.totalEnquiresCnt}" /> </h2>
+									<h2 class="text-success">Enrolled : <p th:text="${dashboard.enrolledCnt}" /> </h2>
+									<h2 class="text-danger">Lost : <p th:text="${dashboard.lostCnt}" /></h2>
 
 								</div>
 							</div>

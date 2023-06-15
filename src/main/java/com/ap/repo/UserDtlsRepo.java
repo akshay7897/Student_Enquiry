@@ -9,5 +9,7 @@ import com.ap.entity.UserDtlsEntity;
 public interface UserDtlsRepo extends JpaRepository<UserDtlsEntity, Integer> {
 	
 	public UserDtlsEntity findByEmail(String email);
+	
+	public UserDtlsEntity findByEmailAndPwd(String email,String pwd);
 
 }

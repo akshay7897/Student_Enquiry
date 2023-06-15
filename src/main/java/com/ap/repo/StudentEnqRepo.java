@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ap.entity.StudentEnqEntity;
 
-public interface StudentEnqRepo  {
+@Repository
+public interface StudentEnqRepo extends JpaRepository<StudentEnqEntity, Integer>  {
 
 }

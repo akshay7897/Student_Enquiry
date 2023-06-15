@@ -1,5 +1,7 @@
 package com.ap.serviceImpl;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private EmailUtils emailutils;
+
+	@Autowired
+	private HttpSession session;
 
 	@Override
 	public boolean signUp(SignUpForm signUpForm) {
@@ -66,21 +71,48 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String login(LoginForm loginForm) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public boolean login(LoginForm loginForm) {
 
-	@Override
-	public boolean unlockAccount(UnlockForm unlockForm) {
-		// TODO Auto-generated method stub
+		UserDtlsEntity entity = repo.findByEmailAndPwd(loginForm.getUsername(), loginForm.getPwd());
+
+		if (entity != null && entity.getAccountStatus().equals("Unlocked")) {
+
+			session.setAttribute("userId", entity.getUserId());
+
+			return true;
+		}
 		return false;
 	}
 
 	@Override
-	public String forgotPwd(String email) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean unlockAccount(UnlockForm unlockForm) {
+
+		UserDtlsEntity entity = repo.findByEmail(unlockForm.getEmail());
+		if (entity != null && entity.getPwd().equals(unlockForm.getTempPwd())) {
+			entity.setPwd(unlockForm.getConfirmPwd());
+			entity.setAccountStatus("Unlocked");
+			repo.save(entity);
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean forgotPwd(String email) {
+
+		UserDtlsEntity entity = repo.findByEmail(email);
+
+		if (entity == null) {
+			return false;
+		}
+
+		String subject = "Recover your password";
+		String body = "<h4>Your password :: </h4>" + entity.getPwd();
+
+		emailutils.sendEmail(email, subject, body);
+
+		return true;
 	}
 
 }

@@ -6,12 +6,12 @@ import com.ap.binding.UnlockForm;
 
 public interface UserService {
 	
-	public String login(LoginForm loginForm);
+	public boolean login(LoginForm loginForm);
 	
 	public boolean signUp(SignUpForm signUpForm);
 	
 	public boolean unlockAccount(UnlockForm unlockForm);
 	
-	public String forgotPwd(String email);
+	public boolean forgotPwd(String email);
 
 }

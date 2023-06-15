@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
-<title>Ashok IT - Enquiry</title>
+<title>Akshay IT - Enquiry</title>
 <!-- MDB icon -->
 <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
 <!-- Font Awesome -->
@@ -25,7 +25,7 @@
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/"> <img alt="ashokit"
-					src="images/AshokIT-Logo.jpg" height="60" width="200">
+				src="images/AshokIT-Logo.jpg" height="60" width="200">
 			</a>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -56,52 +56,57 @@
 									<div class="text-center">
 										<h4 class="mt-1 mb-5 pb-1">Add Student Enquriy Here</h4>
 									</div>
-
-									<form>
+										<p th:text="${succMsg}" class="text-success"/>
+										<p th:text="${errMsg}" class="text-danger"/>
+									<form th:action="@{/enquiry}" th:object="${enquiryForm}"
+										method="post">
 										<div class="form-outline mb-4">
-											<input type="email" id="form2Example11" class="form-control"
-												placeholder="Student Name" /> <label class="form-label"
-												for="form2Example11">Student Name</label>
+											<input type="text" id="form2Example11" class="form-control"
+												placeholder="Student Name" th:field="*{studentName}" /> <label
+												class="form-label" for="form2Example11">Student Name</label>
 										</div>
 
 										<div class="form-outline mb-4">
-											<input type="email" id="form2Example11" class="form-control"
-												placeholder="Student Name" /> <label class="form-label"
-												for="form2Example11">Contact Number</label>
+											<input type="number" id="form2Example12" class="form-control"
+												placeholder="contact number" th:field="*{studentPhno}" /> <label
+												class="form-label" for="form2Example12">Contact
+												Number</label>
 										</div>
 
 										<div class="form-outline mb-4">
-											<label class="form-label" for="form2Example22">Class
-												Mode</label> <select id="form2Example22" class="form-select">
-												<option>-Select-</option>
-												<option>Online</option>
-												<option>Classroom</option>
+											<label class="form-label" for="form2Example20">Class
+												Mode</label> <select id="form2Example20" class="form-select"
+												th:field="*{classMode}">
+												<option value="">-Select-</option>
+												<option value="online">Online</option>
+												<option value="classroom">Classroom</option>
 											</select>
 										</div>
 
 										<div class="form-outline mb-4">
 											<label class="form-label" for="form2Example22">Course</label>
-											<select id="form2Example22" class="form-select">
-												<option>-Select-</option>
-												<option selected>Java Fullstack</option>
-												<option>DevOps</option>
-												<option>AWS</option>
+											<select id="form2Example22" class="form-select"
+												th:field="*{courseName}">
+												<option value="">-Select-</option>
+												<option th:each="courseName : ${courses}" th:value="${courseName}"
+													th:text="${courseName}"></option>
 											</select>
 										</div>
+
 										<div class="form-outline mb-4">
-											<label class="form-label" for="form2Example22">Enquiry
-												Status</label> <select id="form2Example22" class="form-select">
-												<option>-Select-</option>
-												<option selected>New</option>
-												<option>Enrolled</option>
-												<option>Lost</option>
+											<label class="form-label" for="form2Example23">Enquiry Status</label>
+												 
+										<select id="form2Example23" class="form-select" th:field="*{enqStatus}">
+											<option value="">-Select-</option>
+											<option th:each="enqStatus : ${enquiryStatus}" th:value="${enqStatus}"
+													th:text="${enqStatus}"></option>
+												
 											</select>
 										</div>
 
 										<div class="text-center pt-1 mb-5 pb-1">
-											<button
-												class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-												type="button">Submit</button>
+											<input type="submit" value="submit"
+												class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" />
 										</div>
 
 
